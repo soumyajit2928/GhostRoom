@@ -1,0 +1,18 @@
+{"rules":{"rooms":{"$room":{
+  ".read":"auth != null",
+  ".write":"auth != null && data.child('meta/host').val() === auth.uid",
+  "meta":{".write":"auth != null && !data.exists()",
+    ".validate":"newData.hasChildren(['host','created']) && newData.child('host').val() === auth.uid"},
+  "messages":{"$m":{
+    ".write":"auth != null && !data.exists() && root.child('rooms').child($room).child('meta').exists()",
+    ".validate":"newData.hasChildren(['u','n','ts']) && (newData.hasChild('t') || newData.hasChild('i'))",
+    "u":{".validate":"newData.val() === auth.uid"},
+    "n":{".validate":"newData.isString() && newData.val().length <= 24"},
+    "t":{".validate":"newData.isString() && newData.val().length <= 2000"},
+    "i":{".validate":"newData.isString() && newData.val().length <= 100000 && newData.val().beginsWith('data:image/jpeg;base64,')"},
+    "ts":{".validate":"newData.isNumber()"},
+    "$other":{".validate":false}}},
+  "presence":{"$uid":{
+    ".write":"auth != null && auth.uid === $uid && root.child('rooms').child($room).child('meta').exists()",
+    ".validate":"newData.isString() && newData.val().length <= 24"}}
+}}}}

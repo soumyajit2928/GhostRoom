@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ghost Room</title><meta name="robots" content="noindex"><meta name="theme-color" content="#07070c">
+<link rel="stylesheet" href="style.css"></head>
+<body>
+<main id="home" class="card"><h1>Ghost Room</h1>
+<p>Start a private chat room and share its link. Everyone gets a temporary name, and the host can end the session to delete every message.</p>
+<button id="create" class="btn">Create a room</button>
+<p class="note">Rooms are unlisted, not end-to-end encrypted. Anyone with the link can read the chat.</p></main>
+<main id="notice" class="card" hidden><p id="notice-text"></p><button id="back" class="btn">Back to start</button></main>
+<section id="chat" hidden>
+<header><strong>Ghost Room</strong><span id="count" aria-live="polite"></span>
+<span class="sp"></span><button id="copy" class="btn sm">Copy link</button><button id="end" class="btn sm danger" hidden>End session</button><button id="leave" class="btn sm">Leave</button></header>
+<div id="msgs" role="log" aria-live="polite"></div>
+<form id="form"><label class="btn sm" for="file" title="Send image">Image</label><input id="file" type="file" accept="image/*" hidden>
+<input id="text" maxlength="2000" placeholder="Write a message" autocomplete="off" aria-label="Message"><button class="btn sm primary">Send</button></form>
+<p id="err" role="status"></p></section>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="firebase-config.js"></script><script src="app.js"></script>
+</body></html>
